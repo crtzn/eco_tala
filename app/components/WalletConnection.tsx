@@ -48,9 +48,6 @@ export function WalletConnection() {
 
   return (
     <div className="space-y-3">
-      <h3 className="text-lg font-semibold text-[var(--app-foreground)]">
-        Connect Your Wallet
-      </h3>
       <div className="space-y-2">
         <button
           className="w-full bg-[var(--app-accent)] hover:bg-[var(--app-accent-hover)] text-[var(--app-background)] py-3 px-4 rounded-lg font-medium transition-colors disabled:opacity-50"
@@ -77,9 +74,6 @@ export function WalletConnection() {
           )}
         </button>
       </div>
-      <p className="text-xs text-[var(--app-foreground-muted)] text-center">
-        Your wallet connection will stay connected after page reload
-      </p>
     </div>
   );
 }
