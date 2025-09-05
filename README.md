@@ -201,7 +201,7 @@ EcoTala uses a custom smart contract deployed on Base Sepolia:
 
 ## 📞 Contact & Links
 
-- **Demo**: [https://eco-tala.vercel.app](https://eco-tala.vercel.app)
+- **Demo**: [https://ecotala.vercel.app/](https://ecotala.vercel.app/)
 - **Creator**: [@cortezano_dev](https://x.com/cortezano_dev)
 - **GitHub**: [https://github.com/crtzn/eco_tala](https://github.com/crtzn/eco_tala)
 - **Base Contract**: [View on Basescan](https://sepolia.basescan.org/address/0xEdE302BF7539d654Fa18372646008c40436D0f01)

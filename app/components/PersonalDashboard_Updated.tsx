@@ -197,7 +197,7 @@ export function PersonalDashboard({
         <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
           <div className="text-center py-8">
             <Icon
-              name="wallet"
+              name="users"
               className="w-16 h-16 mx-auto mb-4 text-gray-400"
             />
             <h3 className="text-xl font-semibold mb-2">
@@ -221,13 +221,13 @@ export function PersonalDashboard({
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <Icon name="user" className="w-8 h-8 text-emerald-500" />
+            <Icon name="users" className="w-8 h-8 text-emerald-500" />
             <h2 className="text-2xl font-bold">Personal Dashboard</h2>
           </div>
           <div className="flex items-center gap-3">
             {onShare && (
               <Button onClick={onShare} variant="outline" size="sm">
-                <Icon name="share" className="w-4 h-4 mr-2" />
+                <Icon name="arrow-right" className="w-4 h-4 mr-2" />
                 Share
               </Button>
             )}
@@ -237,7 +237,7 @@ export function PersonalDashboard({
               size="sm"
               className="text-gray-500 hover:text-gray-700"
             >
-              <Icon name="x" className="w-5 h-5" />
+              <Icon name="plus" className="w-5 h-5 rotate-45" />
             </Button>
           </div>
         </div>
@@ -291,11 +291,13 @@ export function PersonalDashboard({
 
             {/* Tab Navigation */}
             <div className="flex gap-1 mb-6 bg-gray-100 dark:bg-slate-700 rounded-lg p-1">
-              {[
-                { id: "overview", label: "Overview", icon: "overview" },
-                { id: "actions", label: "Actions", icon: "activity" },
-                { id: "badges", label: "Badges", icon: "award" },
-              ].map((tab) => (
+              {(
+                [
+                  { id: "overview", label: "Overview", icon: "star" },
+                  { id: "actions", label: "Actions", icon: "leaf" },
+                  { id: "badges", label: "Badges", icon: "trophy" },
+                ] as const
+              ).map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
@@ -423,7 +425,7 @@ export function PersonalDashboard({
                           />
                         ) : (
                           <Icon
-                            name="image"
+                            name="camera"
                             className="w-6 h-6 text-gray-400"
                           />
                         )}
@@ -433,7 +435,7 @@ export function PersonalDashboard({
                           <h4 className="font-medium">{action.type}</h4>
                           {action.verified && (
                             <Icon
-                              name="check-circle"
+                              name="check"
                               className="w-4 h-4 text-emerald-500"
                             />
                           )}
