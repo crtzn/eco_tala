@@ -5,32 +5,60 @@
 @tailwind utilities;
 
 :root {
-  --app-background: #ffffff;
-  --app-foreground: #111111;
-  --app-foreground-muted: #58585c;
-  --app-accent: #0052ff;
-  --app-accent-hover: #0047e1;
-  --app-accent-active: #003db8;
-  --app-accent-light: #e6edff;
-  --app-gray: #f5f5f5;
-  --app-gray-dark: #e0e0e0;
-  --app-card-bg: rgba(255, 255, 255, 0.4);
-  --app-card-border: rgba(0, 0, 0, 0.1);
+  --app-background: #f8fffe;
+  --app-background-gradient: linear-gradient(
+    135deg,
+    #e8f8f5 0%,
+    #f0f9ff 50%,
+    #fef3f2 100%
+  );
+  --app-foreground: #0f172a;
+  --app-foreground-muted: #64748b;
+  --app-accent: #10b981;
+  --app-accent-hover: #059669;
+  --app-accent-active: #047857;
+  --app-accent-light: #d1fae5;
+  --app-secondary: #f59e0b;
+  --app-secondary-hover: #d97706;
+  --app-secondary-light: #fef3c7;
+  --app-gray: #f1f5f9;
+  --app-gray-dark: #e2e8f0;
+  --app-card-bg: rgba(255, 255, 255, 0.8);
+  --app-card-bg-hover: rgba(255, 255, 255, 0.9);
+  --app-card-border: rgba(15, 23, 42, 0.08);
+  --app-success: #22c55e;
+  --app-warning: #f59e0b;
+  --app-error: #ef4444;
+  --app-info: #3b82f6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --app-background: #111111;
-    --app-foreground: #ffffff;
-    --app-foreground-muted: #c8c8d1;
-    --app-accent: #0052ff;
-    --app-accent-hover: #0047e1;
-    --app-accent-active: #003db8;
-    --app-accent-light: #1e293b;
-    --app-gray: #1e1e1e;
-    --app-gray-dark: #2e2e2e;
-    --app-card-bg: rgba(17, 17, 17, 0.4);
-    --app-card-border: rgba(115, 115, 115, 0.5);
+    --app-background: #0f172a;
+    --app-background-gradient: linear-gradient(
+      135deg,
+      #1e293b 0%,
+      #334155 50%,
+      #475569 100%
+    );
+    --app-foreground: #f8fafc;
+    --app-foreground-muted: #94a3b8;
+    --app-accent: #34d399;
+    --app-accent-hover: #10b981;
+    --app-accent-active: #059669;
+    --app-accent-light: #064e3b;
+    --app-secondary: #fbbf24;
+    --app-secondary-hover: #f59e0b;
+    --app-secondary-light: #451a03;
+    --app-gray: #1e293b;
+    --app-gray-dark: #334155;
+    --app-card-bg: rgba(30, 41, 59, 0.8);
+    --app-card-bg-hover: rgba(30, 41, 59, 0.9);
+    --app-card-border: rgba(148, 163, 184, 0.2);
+    --app-success: #22c55e;
+    --app-warning: #f59e0b;
+    --app-error: #ef4444;
+    --app-info: #60a5fa;
   }
 }
 
@@ -95,10 +123,13 @@
 body {
   color: var(--app-foreground);
   background: var(--app-background);
+  background-image: var(--app-background-gradient);
+  background-attachment: fixed;
   font-family: var(--font-geist-sans), sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  line-height: 1.6;
 }
 
 @layer utilities {
@@ -108,19 +139,29 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .animate-fade-out {
   animation: fadeOut 3s forwards;
 }
 
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s infinite;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -133,5 +174,26 @@ body {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceSubtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
   }
 }

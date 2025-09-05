@@ -1,21 +1,21 @@
 "use client";
 
-import { type ReactNode, useCallback, useMemo, useState } from "react";
+import { type ReactNode, useCallback, useState, useMemo } from "react";
 import { useAccount } from "wagmi";
+import { useNotification } from "@coinbase/onchainkit/minikit";
 import {
   Transaction,
   TransactionButton,
-  TransactionToast,
-  TransactionToastAction,
-  TransactionToastIcon,
-  TransactionToastLabel,
-  TransactionError,
-  TransactionResponse,
+  TransactionStatus,
   TransactionStatusAction,
   TransactionStatusLabel,
-  TransactionStatus,
+  TransactionToast,
+  TransactionToastIcon,
+  TransactionToastLabel,
+  TransactionToastAction,
+  type TransactionError,
+  type TransactionResponse,
 } from "@coinbase/onchainkit/transaction";
-import { useNotification } from "@coinbase/onchainkit/minikit";
 
 type ButtonProps = {
   children: ReactNode;
@@ -26,7 +26,7 @@ type ButtonProps = {
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   icon?: ReactNode;
-}
+};
 
 export function Button({
   children,
@@ -76,14 +76,9 @@ type CardProps = {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
-}
+};
 
-function Card({
-  title,
-  children,
-  className = "",
-  onClick,
-}: CardProps) {
+function Card({ title, children, className = "", onClick }: CardProps) {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (onClick && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
@@ -180,10 +175,17 @@ export function Home({ setActiveTab }: HomeProps) {
 }
 
 type IconProps = {
-  name: "heart" | "star" | "check" | "plus" | "arrow-right";
+  name:
+    | "heart"
+    | "star"
+    | "check"
+    | "plus"
+    | "arrow-right"
+    | "camera"
+    | "trophy";
   size?: "sm" | "md" | "lg";
   className?: string;
-}
+};
 
 export function Icon({ name, size = "md", className = "" }: IconProps) {
   const sizeClasses = {
@@ -270,6 +272,41 @@ export function Icon({ name, size = "md", className = "" }: IconProps) {
         <polyline points="12 5 19 12 12 19" />
       </svg>
     ),
+    camera: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <title>Camera</title>
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+        <circle cx="12" cy="13" r="4" />
+      </svg>
+    ),
+    trophy: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <title>Trophy</title>
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55.47.98.97 1.21C11.25 18.48 11.61 18.8 12 19c.39-.2.75-.52 1.03-.79.5-.23.97-.66.97-1.21v-2.34" />
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+      </svg>
+    ),
   };
 
   return (
@@ -283,7 +320,7 @@ type Todo = {
   id: number;
   text: string;
   completed: boolean;
-}
+};
 
 function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -386,33 +423,39 @@ function TodoList() {
   );
 }
 
-
 function TransactionCard() {
   const { address } = useAccount();
 
   // Example transaction call - sending 0 ETH to self
-  const calls = useMemo(() => address
-    ? [
-        {
-          to: address,
-          data: "0x" as `0x${string}`,
-          value: BigInt(0),
-        },
-      ]
-    : [], [address]);
+  const calls = useMemo(
+    () =>
+      address
+        ? [
+            {
+              to: address,
+              data: "0x" as `0x${string}`,
+              value: BigInt(0),
+            },
+          ]
+        : [],
+    [address],
+  );
 
   const sendNotification = useNotification();
 
-  const handleSuccess = useCallback(async (response: TransactionResponse) => {
-    const transactionHash = response.transactionReceipts[0].transactionHash;
+  const handleSuccess = useCallback(
+    async (response: TransactionResponse) => {
+      const transactionHash = response.transactionReceipts[0].transactionHash;
 
-    console.log(`Transaction successful: ${transactionHash}`);
+      console.log(`Transaction successful: ${transactionHash}`);
 
-    await sendNotification({
-      title: "Congratulations!",
-      body: `You sent your a transaction, ${transactionHash}!`,
-    });
-  }, [sendNotification]);
+      await sendNotification({
+        title: "Congratulations!",
+        body: `You sent your a transaction, ${transactionHash}!`,
+      });
+    },
+    [sendNotification],
+  );
 
   return (
     <Card title="Make Your First Transaction">
