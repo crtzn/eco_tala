@@ -110,6 +110,10 @@ Implement AI to automatically verify photo/video proof (detecting recycling, reu
 
 Add educational content with tips, videos, and quizzes on sustainable practices tailored for Filipino communities. Reward bonus points for engagement, making EcoTala a comprehensive environmental education platform.
 
+### 🎨 **Creative Recycling NFT Gallery with Auction**
+
+Allow users to submit creative recycled projects (art or crafts made from plastic bottles, like planters or puppets) as eco-action proof. Each verified project is minted as a unique NFT on Base blockchain and showcased in a public gallery for community viewing. Users can auction their NFTs to others using points or ETH via MiniKit, with proceeds supporting creators or donated to Philippine eco-causes. This feature promotes upcycling, reduces waste creatively, and turns sustainability into an artistic, economic opportunity for Filipinos.
+
 ## 🏗️ Getting Started
 
 ### Prerequisites
